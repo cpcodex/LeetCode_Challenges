@@ -88,13 +88,13 @@ In total, you spent $11 and covered all the days of your travel.
 """
 
 # Test start
-days = [1, 4, 6, 7, 8, 20, 23, 7, 1]
+days = [1, 4, 6, 7, 8, 20, 23, 7]
 costs = [2, 7, 15]
 days_cost = []
 days_price = 0
 
 for day in days:
-    print(days_cost)
+    # print(days_cost)
     if day == 1:
         days_price = costs[0]
         days_cost.append(days_price)
@@ -110,4 +110,7 @@ for day in days:
 total = 0
 for num in days_cost:
     total += num
-print(total)
+
+print("=" * 52)
+print(f"| Your total price for the days entered is: ${total}.00 |")
+print("=" * 52)
