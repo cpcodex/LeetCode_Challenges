@@ -64,17 +64,6 @@ Input: days = [1,4,6,7,8,20], costs = [2,7,15]
 Output: 11
 """
 
-# Start program here
-# class Solution:
-#     def mincostTickets(self, days: list[int], costs: list[int]) -> int:
-#         pass
-
-
-# days = input()
-# costs = input()
-
-# c1 = Solution()
-# print(c1.mincostTickets(days, costs))
 """
 Train tickets are sold in three different ways:
 a 1-day pass is sold for costs[0] dollars,
@@ -87,30 +76,34 @@ On day 20, you bought a 1-day pass for costs[0] = $2, which covered day 20.
 In total, you spent $11 and covered all the days of your travel.
 """
 
+
 # Test start
-days = [1, 4, 6, 7, 8, 20, 23, 7]
-costs = [2, 7, 15]
-days_cost = []
-days_price = 0
+class Solution:
+    def mincostTickets(self, days: list[int], costs: list[int]) -> int:
+        n = len(days)
+        dp = [-1] * n
 
-for day in days:
-    # print(days_cost)
-    if day == 1:
-        days_price = costs[0]
-        days_cost.append(days_price)
-    elif day >= 2 and day <= 7:
-        days_price = costs[1]
-        days_cost.append(days_price)
-    elif day >= 8 and day <= 30:
-        days_price = costs[2]
-        days_cost.append(days_price)
-    else:
-        print("Loop presented and error")
+        def solve(in_):
+            if in_ >= n:
+                return 0
 
-total = 0
-for num in days_cost:
-    total += num
+            if dp[in_] != -1:
+                return dp[in_]
 
-print("=" * 52)
-print(f"| Your total price for the days entered is: ${total}.00 |")
-print("=" * 52)
+            ans = float("inf")
+            ans = min(ans, costs[0] + solve(in_ + 1))
+
+            num = in_
+            while num < n and days[num] <= days[in_] + 6:
+                num += 1
+            ans = min(ans, costs[1] + solve(num))
+
+            ij = in_
+            while ij < n and days[ij] <= days[in_] + 29:
+                ij += 1
+            ans = min(ans, costs[2] + solve(ij))
+
+            dp[in_] = ans
+            return ans
+
+        return solve(0)
