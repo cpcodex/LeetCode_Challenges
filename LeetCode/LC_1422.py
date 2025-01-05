@@ -35,5 +35,5 @@ Output: 3
 
 # Solution
 class Solution:
-    def maxScore(self, s: str) -> int:
+    def max_score(self, s: str) -> int:
         pass
