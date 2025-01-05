@@ -5,7 +5,7 @@ Given a string s of zeros and ones, return the maximum score after splitting the
 
 The score after splitting a string is the number of zeros in the left substring plus the number of ones in the right substring.
 
- 
+============
 
 Example 1:
 
@@ -35,5 +35,41 @@ Output: 3
 
 # Solution
 class Solution:
-    def max_score(self, s: str) -> int:
-        pass
+    def maxScore(self, s: str) -> int:
+        totalOnes = s.count("1")  # Count total ones
+        zerosCount = 0
+        onesCount = 0
+        bestScore = float("-inf")
+
+        # Traverse the string and calculate scores
+        for i in range(len(s) - 1):  # Stop before the last character
+            if s[i] == "0":
+                zerosCount += 1
+            else:
+                onesCount += 1
+
+            # Calculate score
+            currentScore = zerosCount + (totalOnes - onesCount)
+            bestScore = max(bestScore, currentScore)
+
+        return bestScore
+
+
+# test logic
+s = "011101"
+
+total_ones = s.count("1")  # count total ones
+zeros_count = 0
+ones_count = 0
+best_score = float()
+
+# iterate through the string and calc scores
+for i in range(len(s) - 1):  # stop before the last character
+    if s[i] == "0":
+        zeros_count += 1
+    else:
+        ones_count += 1
+
+    # calculate score
+    current_score = zeros_count + (total_ones - ones_count)
+    best_score = max(best_score, current_score)
